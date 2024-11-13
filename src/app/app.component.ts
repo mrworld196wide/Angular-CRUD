@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { EmployeeModel } from './model/Employee';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -9,5 +10,27 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'AngularCRUD';
+  employeeForm: FormGroup= new FormGroup({});
+  employeeObj: EmployeeModel = new EmployeeModel();
+
+  constructor(){
+    this.createForm();
+  }
+  
+  createForm(){
+    this.employeeForm= new FormGroup({
+      empId: new FormControl(this.employeeObj.empId),
+      name: new FormControl(this.employeeObj.name),
+      city: new FormControl(this.employeeObj.city),
+      state: new FormControl(this.employeeObj.state),
+      emailId: new FormControl(this.employeeObj.emailId),
+      contactNo: new FormControl(this.employeeObj.contactNo),
+      address: new FormControl(this.employeeObj.address),
+      pinCode: new FormControl(this.employeeObj.pinCode)
+      })
+  }
+
+  onSave(){
+    console.log(this.employeeForm.value);
+  }
 }
